@@ -1,0 +1,30 @@
+name="spotify"
+main="src/index.ts"
+
+compatibility_date = "2022-10-12"
+
+[vars]
+WORKER_BASE_URL = "base url of the worker"
+API_USERNAME = "username"
+API_PASSWROD = "pass"
+
+
+[durable_objects]
+bindings = [
+    {name = "TOKEN", class_name = "DurableToken"},
+]
+
+[[migrations]]
+tag = "v1"
+new_classes = ["Counter"]
+
+[[migrations]]
+tag = "v2"
+new_classes = ["DurableToken"]
+
+[[migrations]]
+tag = "v3"
+deleted_classes = ["Counter"]
+
+[triggers]
+crons = ["*/55 * * * *"]
